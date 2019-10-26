@@ -1,0 +1,38 @@
+##Prepare Data
+./bin/spark-shell --master k8s://https://192.168.39.218:8443 \
+--executor-memory 512M \
+--name prepare-data \
+--conf spark.executor.instances=2 \
+--conf spark.kubernetes.container.image=dvergari/spark:2.4.4-4 \
+--packages io.delta:delta-core_2.11:0.4.0
+
+##Build Model
+./bin/spark-submit --master k8s://https://192.168.39.218:8443 \
+--deploy-mode client \
+--executor-memory 512M  \
+--conf spark.executor.instances=2 \
+--conf spark.kubernetes.container.image=dvergari/spark:2.4.4-4 \
+--class org.outofbounds.linuxday.BostonHousingTraining \
+--conf "spark.hadoop.fs.AbstractFileSystem.gs.impl=com.google.cloud.hadoop.fs.gcs.GoogleHadoopFS" \
+--conf "spark.hadoop.google.cloud.auth.service.account.enable=true" \
+--conf "spark.hadoop.google.cloud.auth.service.account.json.keyfile=/opt/spark/keys/virtualdw-a40630de5992.json" \
+--conf "spark.kubernetes.authenticate.driver.serviceAccountName=spark" \
+gs://linuxday/ml/jars/BostonHousingPrice-assembly-0.1.jar "gs://linuxday/delta/BostonHousing/" "gs://linuxday/ml/models/boston"
+
+
+##Test Model
+./bin/spark-shell --master k8s://https://192.168.39.218:8443 \
+--executor-memory 512M \
+--name test-model \
+--conf spark.executor.instances=2 \
+--conf spark.kubernetes.container.image=dvergari/spark:2.4.4-4 \
+--packages io.delta:delta-core_2.11:0.4.0
+
+
+##Spark Streaming
+./bin/spark-shell --master k8s://https://192.168.39.218:8443 \
+--executor-memory 1G \
+--name real-time-housing \
+--conf spark.executor.instances=1 \
+--conf spark.kubernetes.container.image=dvergari/spark:2.4.4-4 \
+--packages io.delta:delta-core_2.11:0.4.0,org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.4

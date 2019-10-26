@@ -1,0 +1,25 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1446804256758
+Build-Jdk: 1.8.0_60
+Built-By: ub
+Bundle-Description: Efficient and customizable TreeLayout Algorithm in J
+ ava.
+Bundle-DocURL: http://abego-software.de
+Bundle-License: http://www.abego-software.de/legal/apl-v10.html
+Bundle-ManifestVersion: 2
+Bundle-Name: abego TreeLayout Core
+Bundle-SymbolicName: org.abego.treelayout.core
+Bundle-Vendor: abego Software GmbH, Germany
+Bundle-Version: 1.0.3
+Created-By: Apache Maven Bundle Plugin
+Export-Package: org.abego.treelayout.util;uses:="org.abego.treelayout";v
+ ersion="1.0.3",org.abego.treelayout;version="1.0.3"
+Implementation-Title: abego TreeLayout Core
+Implementation-Vendor: abego Software GmbH, Germany
+Implementation-Vendor-Id: org.abego.treelayout
+Implementation-Version: 1.0.3
+Import-Package: sun.misc;resolution:=optional
+Specification-Title: abego TreeLayout Core
+Specification-Vendor: abego Software GmbH, Germany
+Specification-Version: 1.0.3
+Tool: Bnd-1.50.0

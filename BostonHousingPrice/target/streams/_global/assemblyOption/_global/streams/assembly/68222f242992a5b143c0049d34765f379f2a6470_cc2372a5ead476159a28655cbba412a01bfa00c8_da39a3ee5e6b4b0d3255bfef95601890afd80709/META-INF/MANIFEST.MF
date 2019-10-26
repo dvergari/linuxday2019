@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Spark-HasRPackage: false
+Vcs-Release-Tag: v0.4.0
+Vcs-Release-Hash: a746c3af92ea56b8ceac3ed20bb7769c67c11b6a
+
